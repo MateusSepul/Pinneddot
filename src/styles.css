@@ -177,6 +177,7 @@
   body {
     background-color: var(--cork);
     color: var(--color-foreground);
+    font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
   }
 }
 
