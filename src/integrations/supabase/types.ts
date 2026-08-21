@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      pins: {
+        Row: {
+          author: string | null
+          color: string
+          content: string
+          created_at: string
+          id: string
+          kind: string
+          owner_key: string
+          rotation: number
+          x: number
+          y: number
+        }
+        Insert: {
+          author?: string | null
+          color?: string
+          content: string
+          created_at?: string
+          id?: string
+          kind?: string
+          owner_key: string
+          rotation?: number
+          x?: number
+          y?: number
+        }
+        Update: {
+          author?: string | null
+          color?: string
+          content?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          owner_key?: string
+          rotation?: number
+          x?: number
+          y?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
