@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
+import type { Database } from "@/integrations/supabase/types";
+
 export type PinColor = "white" | "yellow" | "pink" | "blue" | "green" | "orange";
 
 export type Pin = {
@@ -36,7 +38,7 @@ export function getOwnerKey(): string {
   return key;
 }
 
-let cached: ReturnType<typeof createClient> | null = null;
+let cached: ReturnType<typeof createClient<Database>> | null = null;
 
 /**
  * Supabase client that forwards the browser's owner key so the database can
@@ -44,7 +46,7 @@ let cached: ReturnType<typeof createClient> | null = null;
  */
 export function getPinsClient() {
   if (cached) return cached;
-  cached = createClient(
+  cached = createClient<Database>(
     import.meta.env["VITE_SUPABASE_URL"] as string,
     import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] as string,
     {
