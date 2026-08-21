@@ -151,13 +151,24 @@ function Board() {
   return (
     <main className="relative h-screen overflow-hidden">
       <header className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 p-4 sm:p-6">
-        <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-card/85 px-4 py-2 shadow-lg backdrop-blur">
-          <PinIcon className="size-5 -rotate-45 text-primary" />
-          <h1 className="font-hand text-3xl leading-none text-foreground">Pinned.</h1>
+        <div className="pointer-events-auto flex items-center gap-2 px-5 py-2.5 shadow-lg" style={{
+            background: "linear-gradient(180deg, #fff8f0 0%, #f0d8b8 40%, #d4a870 100%)",
+            borderRadius: "12px",
+            border: "2px solid #a0724a",
+            boxShadow: "0 2px 0 #6b4a2a, 0 6px 16px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.8)",
+          }}>
+          <PinIcon className="size-5 -rotate-45" style={{ color: "#cc2200" }} />
+          <h1 style={{ fontFamily: '"Impact", "Arial Black", sans-serif', fontSize: "1.6rem", letterSpacing: "-0.5px", lineHeight: 1, color: "#3a1a00", textShadow: "0 1px 0 rgba(255,255,255,0.5)" }}>Pinned.</h1>
         </div>
         <div className="pointer-events-auto flex items-center gap-2">
-          <span className="rounded-full bg-card/85 px-3 py-2 font-hand text-lg shadow-lg backdrop-blur">
-            {pins.length} {pins.length === 1 ? "pin" : "pins"}
+          <span className="rounded-full px-3 py-1.5 font-hand text-lg shadow-lg" style={{
+              background: "linear-gradient(180deg, #fff8f0 0%, #f0d8b8 40%, #d4a870 100%)",
+              border: "2px solid #a0724a",
+              boxShadow: "0 2px 0 #6b4a2a, 0 4px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.7)",
+              color: "#3a1a00",
+              fontWeight: 700,
+            }}>
+            📌 {pins.length} {pins.length === 1 ? "pin" : "pins"}
           </span>
           <div className="hidden items-center gap-1 rounded-full bg-card/85 p-1 shadow-lg backdrop-blur sm:flex">
             <Button
@@ -230,13 +241,27 @@ function Board() {
         </p>
       )}
 
-      <Button
-        size="lg"
+      <button
+        id="btn-novo-pin"
         onClick={() => setEditorOpen(true)}
-        className="fixed bottom-6 right-6 z-30 rounded-full px-6 py-6 font-hand text-2xl shadow-xl transition hover:-translate-y-0.5"
+        className="fixed bottom-6 right-6 z-30 flex items-center gap-2 font-hand text-xl transition-all active:scale-95"
+        style={{
+          background: "linear-gradient(180deg, #ff6644 0%, #dd2200 50%, #aa1100 100%)",
+          color: "#fff",
+          border: "2px solid #770000",
+          borderRadius: "16px",
+          padding: "14px 24px",
+          boxShadow: "0 3px 0 #550000, 0 8px 24px rgba(180,20,0,0.55), inset 0 1px 0 rgba(255,180,160,0.5)",
+          textShadow: "0 1px 2px rgba(0,0,0,0.4)",
+          cursor: "pointer",
+          fontWeight: 700,
+          letterSpacing: "0.3px",
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 5px 0 #550000, 0 12px 28px rgba(180,20,0,0.65), inset 0 1px 0 rgba(255,180,160,0.5)"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = ""; (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 3px 0 #550000, 0 8px 24px rgba(180,20,0,0.55), inset 0 1px 0 rgba(255,180,160,0.5)"; }}
       >
-        <Plus className="mr-1 size-5" /> Novo Pin
-      </Button>
+        <Plus className="size-5" /> Novo Pin
+      </button>
 
       <PinEditor open={editorOpen} onOpenChange={setEditorOpen} onSave={savePin} />
     </main>

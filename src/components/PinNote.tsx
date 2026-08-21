@@ -46,13 +46,14 @@ export function PinNote({ pin, isMine, scale, onDelete, onMove }: Props) {
   return (
     <div
       ref={ref}
-      className="note absolute w-[200px] select-none"
+      className="note absolute w-[210px] select-none"
       style={{
         left: pin.x,
         top: pin.y,
         transform: `rotate(${pin.rotation}deg)`,
         background: `var(--note-${pin.color})`,
         cursor: isMine ? "grab" : "default",
+        marginTop: "36px", /* make room for the 46px pin that extends above */
       }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -66,14 +67,15 @@ export function PinNote({ pin, isMine, scale, onDelete, onMove }: Props) {
           aria-label="Excluir post-it"
           onClick={() => onDelete(pin.id)}
           className="absolute right-1.5 top-1.5 rounded-full bg-foreground/10 p-1 text-foreground/60 opacity-0 transition hover:bg-destructive hover:text-destructive-foreground focus-visible:opacity-100 group-hover:opacity-100 [.note:hover_&]:opacity-100"
+          style={{ zIndex: 2 }}
         >
           <Trash2 className="size-3.5" />
         </button>
       )}
 
-      <div className="px-4 pb-3 pt-7">
+      <div className="px-4 pb-3 pt-8">
         {pin.kind === "text" ? (
-          <p className="font-hand text-[1.35rem] leading-tight break-words text-foreground/85">
+          <p className="font-hand text-[1.35rem] leading-tight break-words text-foreground/85" style={{ zIndex: 2, position: "relative" }}>
             {pin.content}
           </p>
         ) : (
@@ -82,9 +84,10 @@ export function PinNote({ pin, isMine, scale, onDelete, onMove }: Props) {
             alt="Desenho fixado no mural"
             className="w-full rounded-sm"
             draggable={false}
+            style={{ position: "relative", zIndex: 2 }}
           />
         )}
-        <div className="mt-3 flex items-center justify-between font-hand text-sm text-foreground/50">
+        <div className="mt-3 flex items-center justify-between font-hand text-sm text-foreground/50" style={{ zIndex: 2, position: "relative" }}>
           <span>{pin.author?.trim() ? pin.author : "Anônimo"}</span>
           <span>{formatDate(pin.created_at)}</span>
         </div>

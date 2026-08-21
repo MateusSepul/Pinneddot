@@ -134,6 +134,7 @@
 
 @theme inline {
   --font-hand: "Caveat", "Segoe Script", cursive;
+  --font-display: "Impact", "Arial Black", sans-serif;
 }
 
 :root {
@@ -144,7 +145,7 @@
   --card-foreground: oklch(0.26 0.04 45);
   --popover: oklch(0.99 0.01 85);
   --popover-foreground: oklch(0.26 0.04 45);
-  --primary: oklch(0.58 0.19 25);
+  --primary: oklch(0.45 0.22 25);
   --primary-foreground: oklch(0.98 0.01 85);
   --secondary: oklch(0.9 0.04 80);
   --secondary-foreground: oklch(0.3 0.05 45);
@@ -154,19 +155,22 @@
   --accent-foreground: oklch(0.26 0.04 45);
   --destructive: oklch(0.55 0.21 25);
   --destructive-foreground: oklch(0.98 0.01 85);
-  --border: oklch(0.85 0.03 75);
+  --border: oklch(0.75 0.06 60);
   --input: oklch(0.85 0.03 75);
-  --ring: oklch(0.58 0.19 25);
+  --ring: oklch(0.45 0.22 25);
 
-  --cork: oklch(0.66 0.08 62);
-  --cork-dark: oklch(0.55 0.08 55);
+  /* Cork board */
+  --cork: oklch(0.60 0.10 58);
+  --cork-dark: oklch(0.46 0.09 50);
+  --cork-light: oklch(0.70 0.09 68);
 
-  --note-white: oklch(0.98 0.005 90);
-  --note-yellow: oklch(0.92 0.13 96);
-  --note-pink: oklch(0.89 0.09 5);
-  --note-blue: oklch(0.89 0.07 230);
-  --note-green: oklch(0.91 0.09 140);
-  --note-orange: oklch(0.87 0.12 60);
+  /* Note colors — Y2K vivid */
+  --note-white:  #f8f4ec;
+  --note-yellow: #fde84a;
+  --note-pink:   #ff7eb3;
+  --note-blue:   #7ec8f8;
+  --note-green:  #72e28a;
+  --note-orange: #ffaa33;
 }
 
 @layer base {
@@ -177,43 +181,171 @@
   body {
     background-color: var(--cork);
     color: var(--color-foreground);
-    font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Nunito", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
   }
 }
 
+/* ──────────────────────────────────────────────
+   Y2K CORK BOARD — Rich skeuomorphic texture
+────────────────────────────────────────────── */
 @utility corkboard {
   background-color: var(--cork);
   background-image:
-    radial-gradient(circle at 20% 30%, oklch(0.72 0.07 65 / 55%) 0 2px, transparent 3px),
-    radial-gradient(circle at 70% 60%, oklch(0.5 0.07 50 / 45%) 0 2px, transparent 3px),
-    radial-gradient(circle at 45% 80%, oklch(0.75 0.06 70 / 40%) 0 1.5px, transparent 3px),
-    radial-gradient(circle at 85% 15%, oklch(0.48 0.06 45 / 40%) 0 1.5px, transparent 3px),
-    radial-gradient(ellipse at 50% 40%, oklch(0.72 0.08 65 / 60%), var(--cork-dark));
+    /* Cork pores — tiny dark dots */
+    radial-gradient(ellipse 1px 1.5px at 10% 15%, rgba(80,45,10,0.55) 0%, transparent 100%),
+    radial-gradient(ellipse 1.5px 1px at 30% 40%, rgba(90,50,12,0.45) 0%, transparent 100%),
+    radial-gradient(ellipse 1px 1px at 55% 22%, rgba(70,38,8,0.50) 0%, transparent 100%),
+    radial-gradient(ellipse 1.5px 1px at 75% 65%, rgba(85,46,10,0.45) 0%, transparent 100%),
+    radial-gradient(ellipse 1px 1.5px at 88% 30%, rgba(72,40,9,0.50) 0%, transparent 100%),
+    radial-gradient(ellipse 1px 1px at 42% 78%, rgba(95,52,11,0.40) 0%, transparent 100%),
+    radial-gradient(ellipse 1.5px 1px at 20% 88%, rgba(78,43,10,0.48) 0%, transparent 100%),
+    radial-gradient(ellipse 1px 1.5px at 65% 10%, rgba(68,37,8,0.55) 0%, transparent 100%),
+    /* Cork grain streaks */
+    repeating-linear-gradient(
+      168deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(120,65,15,0.06) 6px,
+      rgba(120,65,15,0.06) 7px,
+      transparent 7px,
+      transparent 14px
+    ),
+    repeating-linear-gradient(
+      175deg,
+      transparent 0px,
+      transparent 10px,
+      rgba(80,40,8,0.07) 10px,
+      rgba(80,40,8,0.07) 11px,
+      transparent 11px,
+      transparent 22px
+    ),
+    /* Base warm cork radial */
+    radial-gradient(ellipse 120% 100% at 45% 35%, var(--cork-light), var(--cork) 50%, var(--cork-dark));
   background-size:
-    38px 38px,
-    52px 52px,
-    26px 26px,
-    64px 64px,
+    31px 31px,
+    47px 47px,
+    23px 23px,
+    53px 53px,
+    37px 37px,
+    29px 29px,
+    41px 41px,
+    19px 19px,
+    100% 100%,
+    100% 100%,
     100% 100%;
 }
 
+/* ──────────────────────────────────────────────
+   Y2K STICKY NOTE — Thick, beveled, skeuomorphic
+────────────────────────────────────────────── */
 @utility note {
-  border-radius: 3px;
+  border-radius: 2px 2px 4px 4px;
+  /* Thick paper feel: top highlight, left bevel, right shadow, bottom ridge, drop shadow */
   box-shadow:
-    0 1px 1px oklch(0.2 0.03 45 / 20%),
-    0 10px 18px -6px oklch(0.2 0.03 45 / 45%);
-  transition: box-shadow 160ms ease;
+    inset 0 2px 0 rgba(255,255,255,0.55),
+    inset 2px 0 0 rgba(255,255,255,0.35),
+    inset -2px 0 0 rgba(0,0,0,0.12),
+    inset 0 -3px 0 rgba(0,0,0,0.18),
+    0 2px 0 rgba(0,0,0,0.22),
+    0 6px 0 rgba(0,0,0,0.12),
+    0 14px 24px -4px rgba(0,0,0,0.55),
+    0 4px 8px -2px rgba(0,0,0,0.40);
+  transition: box-shadow 120ms ease, transform 120ms ease;
+  /* Subtle paper texture overlay */
+  position: relative;
+  overflow: visible;
 }
 
+.note::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,0.28) 0%,
+    rgba(255,255,255,0.05) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.note:hover {
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.55),
+    inset 2px 0 0 rgba(255,255,255,0.35),
+    inset -2px 0 0 rgba(0,0,0,0.12),
+    inset 0 -3px 0 rgba(0,0,0,0.18),
+    0 2px 0 rgba(0,0,0,0.25),
+    0 6px 0 rgba(0,0,0,0.14),
+    0 22px 36px -6px rgba(0,0,0,0.65),
+    0 8px 14px -2px rgba(0,0,0,0.45);
+}
+
+/* ──────────────────────────────────────────────
+   Y2K 3D PUSHPIN — CSS-only realistic pushpin
+   Structure: wrapper > sphere-cap + neck + needle-tip + cast-shadow
+────────────────────────────────────────────── */
 @utility pin-head {
+  /* Outer wrapper: positions the whole pin */
   position: absolute;
   left: 50%;
-  top: -9px;
-  height: 18px;
-  width: 18px;
+  top: -36px;
+  width: 34px;
+  height: 46px;
   transform: translateX(-50%);
-  border-radius: 9999px;
-  background: radial-gradient(circle at 35% 30%, oklch(0.75 0.2 25), oklch(0.45 0.19 25));
-  box-shadow: 0 3px 5px oklch(0.2 0.03 45 / 45%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* The glossy sphere cap (top dome) */
+.pin-head::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
+  background:
+    /* Top-left specular highlight */
+    radial-gradient(ellipse 55% 40% at 35% 28%, rgba(255,255,255,0.90) 0%, rgba(255,255,255,0.0) 70%),
+    /* Bottom-right secondary highlight */
+    radial-gradient(ellipse 30% 22% at 72% 70%, rgba(255,255,255,0.30) 0%, transparent 80%),
+    /* Base color sphere — red like reference image */
+    radial-gradient(ellipse 90% 90% at 40% 35%,
+      #ff5555 0%,
+      #cc1111 40%,
+      #880000 75%,
+      #550000 100%
+    );
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.55),
+    0 1px 2px rgba(0,0,0,0.70),
+    inset 0 -3px 5px rgba(0,0,0,0.30);
+}
+
+/* The neck / shaft connecting sphere to needle */
+.pin-head::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Needle: thin metallic gradient cylinder */
+  width: 4px;
+  height: 22px;
+  border-radius: 2px 2px 1px 1px;
+  background: linear-gradient(
+    to right,
+    #888 0%,
+    #ccc 25%,
+    #f0f0f0 45%,
+    #bbb 65%,
+    #777 100%
+  );
+  box-shadow: 0 2px 4px rgba(0,0,0,0.50);
 }
 
