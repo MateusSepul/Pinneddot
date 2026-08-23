@@ -1,11 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Plus, Minus, Pin as PinIcon } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { PinEditor } from "@/components/PinEditor";
 import { PinNote } from "@/components/PinNote";
-import { Button } from "@/components/ui/button";
 import { getOwnerKey, getPinsClient, type Pin, type PinColor } from "@/lib/pins";
 
 export const Route = createFileRoute("/")({
@@ -125,7 +123,7 @@ function Board() {
       color: data.color,
       author: data.author || null,
       owner_key: getOwnerKey(),
-      rotation: Math.random() * 16 - 8,
+      rotation: Math.random() * 10 - 5,
       x: (-offset.x + Math.random() * (w - 260) + 30) / zoom,
       y: (-offset.y + Math.random() * (h - 300) + 100) / zoom,
     });
@@ -149,57 +147,109 @@ function Board() {
   };
 
   return (
-    <main className="relative h-screen overflow-hidden">
-      <header className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 p-4 sm:p-6">
-        <div className="pointer-events-auto flex items-center gap-2 px-5 py-2.5 shadow-lg" style={{
-            background: "linear-gradient(180deg, #fff8f0 0%, #f0d8b8 40%, #d4a870 100%)",
-            borderRadius: "12px",
-            border: "2px solid #a0724a",
-            boxShadow: "0 2px 0 #6b4a2a, 0 6px 16px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.8)",
-          }}>
-          <PinIcon className="size-5 -rotate-45" style={{ color: "#cc2200" }} />
-          <h1 style={{ fontFamily: '"Impact", "Arial Black", sans-serif', fontSize: "1.6rem", letterSpacing: "-0.5px", lineHeight: 1, color: "#3a1a00", textShadow: "0 1px 0 rgba(255,255,255,0.5)" }}>Pinned.</h1>
+    <main className="relative h-screen overflow-hidden" style={{ background: "#c0c0c0" }}>
+      {/* MS Paint-style toolbar at top */}
+      <header
+        className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 px-3 sm:px-6"
+        style={{
+          background: "linear-gradient(180deg, #d4d0c8 0%, #c0c0c0 100%)",
+          borderBottom: "3px solid #000000",
+          boxShadow: "0 3px 0 #808080",
+          height: "84px",
+        }}
+      >
+        {/* Logo */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="/logo.png"
+            alt="Pinned."
+            style={{
+              height: "72px",
+              width: "auto",
+              display: "block",
+              imageRendering: "pixelated",
+              filter: "drop-shadow(2px 2px 0px rgba(0,0,0,0.3))",
+            }}
+          />
         </div>
-        <div className="pointer-events-auto flex items-center gap-2">
-          <span className="rounded-full px-3 py-1.5 font-hand text-lg shadow-lg" style={{
-              background: "linear-gradient(180deg, #fff8f0 0%, #f0d8b8 40%, #d4a870 100%)",
-              border: "2px solid #a0724a",
-              boxShadow: "0 2px 0 #6b4a2a, 0 4px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.7)",
-              color: "#3a1a00",
-              fontWeight: 700,
-            }}>
+
+        {/* Right side controls — paint-style raised buttons */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          {/* Pin counter */}
+          <div
+            style={{
+              background: "#ffffff",
+              border: "2px solid #000000",
+              boxShadow: "inset 1px 1px 0 #808080, 1px 1px 0 #ffffff",
+              padding: "4px 12px",
+              fontFamily: "Arial, sans-serif",
+              fontWeight: "bold",
+              fontSize: "14px",
+              color: "#000000",
+              minWidth: "85px",
+              textAlign: "center",
+            }}
+          >
             📌 {pins.length} {pins.length === 1 ? "pin" : "pins"}
-          </span>
-          <div className="hidden items-center gap-1 rounded-full bg-card/85 p-1 shadow-lg backdrop-blur sm:flex">
-            <Button
-              variant="ghost"
-              size="icon"
+          </div>
+
+          {/* Zoom buttons — paint toolbar style */}
+          <div style={{ display: "flex", gap: "3px" }}>
+            <button
               aria-label="Diminuir zoom"
               onClick={() => {
                 const el = containerRef.current;
                 zoomAt(1 / 1.2, (el?.clientWidth ?? 0) / 2, (el?.clientHeight ?? 0) / 2);
               }}
+              style={{
+                width: "32px",
+                height: "32px",
+                background: "linear-gradient(180deg, #e0ddd8 0%, #c8c5c0 100%)",
+                border: "2px solid #000000",
+                boxShadow: "inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080, 1px 1px 0 #000000",
+                cursor: "pointer",
+                fontWeight: "bold",
+                fontSize: "18px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "Arial",
+              }}
             >
-              <Minus className="size-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
+              −
+            </button>
+            <button
               aria-label="Aumentar zoom"
               onClick={() => {
                 const el = containerRef.current;
                 zoomAt(1.2, (el?.clientWidth ?? 0) / 2, (el?.clientHeight ?? 0) / 2);
               }}
+              style={{
+                width: "32px",
+                height: "32px",
+                background: "linear-gradient(180deg, #e0ddd8 0%, #c8c5c0 100%)",
+                border: "2px solid #000000",
+                boxShadow: "inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080, 1px 1px 0 #000000",
+                cursor: "pointer",
+                fontWeight: "bold",
+                fontSize: "18px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "Arial",
+              }}
             >
-              <Plus className="size-4" />
-            </Button>
+              +
+            </button>
           </div>
         </div>
       </header>
 
+      {/* Canvas area */}
       <div
         ref={containerRef}
         className="corkboard h-full w-full touch-none"
+        style={{ paddingTop: "84px" }}
         onPointerDown={(e) => {
           pan.current = { id: e.pointerId, x: e.clientX, y: e.clientY, ox: offset.x, oy: offset.y };
         }}
@@ -236,31 +286,60 @@ function Board() {
       </div>
 
       {pins.length === 0 && (
-        <p className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-8 text-center font-hand text-3xl text-card/90 drop-shadow">
-          O mural está vazio. Fixe o primeiro recado!
+        <p
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-8 text-center"
+          style={{
+            fontFamily: "Arial, sans-serif",
+            fontSize: "18px",
+            fontWeight: "bold",
+            color: "#000000",
+            paddingTop: "56px",
+          }}
+        >
+          O mural está vazio. Clique em "Novo Pin" para começar!
         </p>
       )}
 
+      {/* "Novo Pin" button — big Paint-style */}
       <button
         id="btn-novo-pin"
         onClick={() => setEditorOpen(true)}
-        className="fixed bottom-6 right-6 z-30 flex items-center gap-2 font-hand text-xl transition-all active:scale-95"
         style={{
-          background: "linear-gradient(180deg, #ff6644 0%, #dd2200 50%, #aa1100 100%)",
-          color: "#fff",
-          border: "2px solid #770000",
-          borderRadius: "16px",
-          padding: "14px 24px",
-          boxShadow: "0 3px 0 #550000, 0 8px 24px rgba(180,20,0,0.55), inset 0 1px 0 rgba(255,180,160,0.5)",
-          textShadow: "0 1px 2px rgba(0,0,0,0.4)",
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          zIndex: 30,
+          background: "linear-gradient(180deg, #e8e5e0 0%, #c8c5c0 100%)",
+          color: "#000000",
+          border: "3px solid #000000",
+          boxShadow: "inset 2px 2px 0 #ffffff, inset -2px -2px 0 #808080, 3px 3px 0 #000000",
+          padding: "10px 20px",
+          fontFamily: "Arial, sans-serif",
+          fontWeight: "bold",
+          fontSize: "14px",
           cursor: "pointer",
-          fontWeight: 700,
-          letterSpacing: "0.3px",
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          letterSpacing: "0.5px",
         }}
-        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 5px 0 #550000, 0 12px 28px rgba(180,20,0,0.65), inset 0 1px 0 rgba(255,180,160,0.5)"; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = ""; (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 3px 0 #550000, 0 8px 24px rgba(180,20,0,0.55), inset 0 1px 0 rgba(255,180,160,0.5)"; }}
+        onMouseDown={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "inset -2px -2px 0 #ffffff, inset 2px 2px 0 #808080, 1px 1px 0 #000000";
+          (e.currentTarget as HTMLButtonElement).style.transform = "translate(2px, 2px)";
+        }}
+        onMouseUp={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "inset 2px 2px 0 #ffffff, inset -2px -2px 0 #808080, 3px 3px 0 #000000";
+          (e.currentTarget as HTMLButtonElement).style.transform = "";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.boxShadow =
+            "inset 2px 2px 0 #ffffff, inset -2px -2px 0 #808080, 3px 3px 0 #000000";
+          (e.currentTarget as HTMLButtonElement).style.transform = "";
+        }}
       >
-        <Plus className="size-5" /> Novo Pin
+        📌 Novo Pin
       </button>
 
       <PinEditor open={editorOpen} onOpenChange={setEditorOpen} onSave={savePin} />

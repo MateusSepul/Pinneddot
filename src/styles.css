@@ -4,28 +4,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -62,290 +48,209 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --radius: 0px;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000080;
+  --primary-foreground: #ffffff;
+  --secondary: #c0c0c0;
+  --secondary-foreground: #000000;
+  --muted: #c0c0c0;
+  --muted-foreground: #000000;
+  --accent: #008080;
+  --accent-foreground: #ffffff;
+  --destructive: #ff0000;
+  --destructive-foreground: #ffffff;
+  --border: #000000;
+  --input: #ffffff;
+  --ring: #000000;
+  --chart-1: #ff0000;
+  --chart-2: #00ff00;
+  --chart-3: #0000ff;
+  --chart-4: #ffff00;
+  --chart-5: #ff00ff;
+  --sidebar: #c0c0c0;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000080;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #008080;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #000000;
+  --sidebar-ring: #000000;
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Paint note colors — flat & vivid */
+  --note-white:  #ffffff;
+  --note-yellow: #ffff00;
+  --note-pink:   #ff80c0;
+  --note-blue:   #80c0ff;
+  --note-green:  #80ff80;
+  --note-orange: #ff8000;
 }
 
 @theme inline {
-  --font-hand: "Caveat", "Segoe Script", cursive;
-  --font-display: "Impact", "Arial Black", sans-serif;
-}
-
-:root {
-  --radius: 0.75rem;
-  --background: oklch(0.94 0.02 80);
-  --foreground: oklch(0.26 0.04 45);
-  --card: oklch(0.99 0.01 85);
-  --card-foreground: oklch(0.26 0.04 45);
-  --popover: oklch(0.99 0.01 85);
-  --popover-foreground: oklch(0.26 0.04 45);
-  --primary: oklch(0.45 0.22 25);
-  --primary-foreground: oklch(0.98 0.01 85);
-  --secondary: oklch(0.9 0.04 80);
-  --secondary-foreground: oklch(0.3 0.05 45);
-  --muted: oklch(0.91 0.03 80);
-  --muted-foreground: oklch(0.48 0.04 55);
-  --accent: oklch(0.83 0.14 85);
-  --accent-foreground: oklch(0.26 0.04 45);
-  --destructive: oklch(0.55 0.21 25);
-  --destructive-foreground: oklch(0.98 0.01 85);
-  --border: oklch(0.75 0.06 60);
-  --input: oklch(0.85 0.03 75);
-  --ring: oklch(0.45 0.22 25);
-
-  /* Cork board */
-  --cork: oklch(0.60 0.10 58);
-  --cork-dark: oklch(0.46 0.09 50);
-  --cork-light: oklch(0.70 0.09 68);
-
-  /* Note colors — Y2K vivid */
-  --note-white:  #f8f4ec;
-  --note-yellow: #fde84a;
-  --note-pink:   #ff7eb3;
-  --note-blue:   #7ec8f8;
-  --note-green:  #72e28a;
-  --note-orange: #ffaa33;
+  --font-hand: "Courier New", monospace;
+  --font-display: "Arial Black", "Arial Bold", sans-serif;
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+    image-rendering: pixelated;
   }
 
   body {
-    background-color: var(--cork);
-    color: var(--color-foreground);
-    font-family: "Nunito", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: "Arial", "Helvetica", sans-serif;
   }
 }
 
 /* ──────────────────────────────────────────────
-   Y2K CORK BOARD — Rich skeuomorphic texture
+   PAINT-STYLE WOOD TEXTURE BACKGROUND
+   Flat, hard-edged, no blur — looks hand-drawn
 ────────────────────────────────────────────── */
 @utility corkboard {
-  background-color: var(--cork);
+  position: relative;
+  background-color: #c8882a;
+
+  /* Layered hard-stop gradients = Paint wood grain */
   background-image:
-    /* Cork pores — tiny dark dots */
-    radial-gradient(ellipse 1px 1.5px at 10% 15%, rgba(80,45,10,0.55) 0%, transparent 100%),
-    radial-gradient(ellipse 1.5px 1px at 30% 40%, rgba(90,50,12,0.45) 0%, transparent 100%),
-    radial-gradient(ellipse 1px 1px at 55% 22%, rgba(70,38,8,0.50) 0%, transparent 100%),
-    radial-gradient(ellipse 1.5px 1px at 75% 65%, rgba(85,46,10,0.45) 0%, transparent 100%),
-    radial-gradient(ellipse 1px 1.5px at 88% 30%, rgba(72,40,9,0.50) 0%, transparent 100%),
-    radial-gradient(ellipse 1px 1px at 42% 78%, rgba(95,52,11,0.40) 0%, transparent 100%),
-    radial-gradient(ellipse 1.5px 1px at 20% 88%, rgba(78,43,10,0.48) 0%, transparent 100%),
-    radial-gradient(ellipse 1px 1.5px at 65% 10%, rgba(68,37,8,0.55) 0%, transparent 100%),
-    /* Cork grain streaks */
+    /* Pixel knots — dark round blobs */
+    radial-gradient(ellipse 18px 12px at 12%  22%, #7a4010 0%, #7a4010 55%, transparent 56%),
+    radial-gradient(ellipse 14px 10px at 12%  22%, #a05018 0%, #a05018 38%, transparent 39%),
+    radial-gradient(ellipse 22px 14px at 67%  58%, #7a4010 0%, #7a4010 55%, transparent 56%),
+    radial-gradient(ellipse 16px 10px at 67%  58%, #a05018 0%, #a05018 38%, transparent 39%),
+    radial-gradient(ellipse 16px 10px at 88%  15%, #7a4010 0%, #7a4010 55%, transparent 56%),
+    radial-gradient(ellipse 12px  8px at 88%  15%, #a05018 0%, #a05018 38%, transparent 39%),
+    radial-gradient(ellipse 20px 12px at 35%  80%, #7a4010 0%, #7a4010 55%, transparent 56%),
+    radial-gradient(ellipse 14px  8px at 35%  80%, #a05018 0%, #a05018 38%, transparent 39%),
+
+    /* Hard horizontal grain lines — no blur, flat colors */
     repeating-linear-gradient(
-      168deg,
-      transparent 0px,
-      transparent 6px,
-      rgba(120,65,15,0.06) 6px,
-      rgba(120,65,15,0.06) 7px,
-      transparent 7px,
-      transparent 14px
+      180deg,
+      transparent          0px,
+      transparent          3px,
+      #b87820              3px,
+      #b87820              4px,
+      transparent          4px,
+      transparent          9px,
+      #bf8228              9px,
+      #bf8228             10px,
+      transparent         10px,
+      transparent         14px,
+      #a06818             14px,
+      #a06818             15px,
+      transparent         15px,
+      transparent         20px,
+      #d09030             20px,
+      #d09030             21px,
+      transparent         21px,
+      transparent         26px,
+      #b07020             26px,
+      #b07020             27px,
+      transparent         27px,
+      transparent         32px
     ),
+
+    /* Coarse dark streaks — wide grain bands */
     repeating-linear-gradient(
-      175deg,
-      transparent 0px,
-      transparent 10px,
-      rgba(80,40,8,0.07) 10px,
-      rgba(80,40,8,0.07) 11px,
-      transparent 11px,
-      transparent 22px
+      178deg,
+      transparent          0px,
+      transparent         18px,
+      #9a5e10             18px,
+      #9a5e10             20px,
+      transparent         20px,
+      transparent         45px,
+      #8a5010             45px,
+      #8a5010             47px,
+      transparent         47px,
+      transparent         70px,
+      #a06010             70px,
+      #a06010             72px,
+      transparent         72px,
+      transparent        100px
     ),
-    /* Base warm cork radial */
-    radial-gradient(ellipse 120% 100% at 45% 35%, var(--cork-light), var(--cork) 50%, var(--cork-dark));
-  background-size:
-    31px 31px,
-    47px 47px,
-    23px 23px,
-    53px 53px,
-    37px 37px,
-    29px 29px,
-    41px 41px,
-    19px 19px,
-    100% 100%,
-    100% 100%,
-    100% 100%;
+
+    /* Light highlight streaks */
+    repeating-linear-gradient(
+      182deg,
+      transparent          0px,
+      transparent         11px,
+      #e0a040             11px,
+      #e0a040             12px,
+      transparent         12px,
+      transparent         29px,
+      #d89030             29px,
+      #d89030             30px,
+      transparent         30px,
+      transparent         55px
+    );
 }
 
 /* ──────────────────────────────────────────────
-   Y2K STICKY NOTE — Thick, beveled, skeuomorphic
+   PAINT STICKY NOTE — Flat, bold borders
 ────────────────────────────────────────────── */
 @utility note {
-  border-radius: 2px 2px 4px 4px;
-  /* Thick paper feel: top highlight, left bevel, right shadow, bottom ridge, drop shadow */
+  border: 3px solid #000000;
+  border-radius: 0;
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,0.55),
-    inset 2px 0 0 rgba(255,255,255,0.35),
-    inset -2px 0 0 rgba(0,0,0,0.12),
-    inset 0 -3px 0 rgba(0,0,0,0.18),
-    0 2px 0 rgba(0,0,0,0.22),
-    0 6px 0 rgba(0,0,0,0.12),
-    0 14px 24px -4px rgba(0,0,0,0.55),
-    0 4px 8px -2px rgba(0,0,0,0.40);
-  transition: box-shadow 120ms ease, transform 120ms ease;
-  /* Subtle paper texture overlay */
+    3px 3px 0 #000000,
+    5px 5px 0 rgba(0,0,0,0.3);
   position: relative;
   overflow: visible;
-}
-
-.note::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    160deg,
-    rgba(255,255,255,0.28) 0%,
-    rgba(255,255,255,0.05) 40%,
-    transparent 60%
-  );
-  pointer-events: none;
-  z-index: 1;
+  image-rendering: pixelated;
 }
 
 .note:hover {
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,0.55),
-    inset 2px 0 0 rgba(255,255,255,0.35),
-    inset -2px 0 0 rgba(0,0,0,0.12),
-    inset 0 -3px 0 rgba(0,0,0,0.18),
-    0 2px 0 rgba(0,0,0,0.25),
-    0 6px 0 rgba(0,0,0,0.14),
-    0 22px 36px -6px rgba(0,0,0,0.65),
-    0 8px 14px -2px rgba(0,0,0,0.45);
+    4px 4px 0 #000000,
+    7px 7px 0 rgba(0,0,0,0.3);
+  transform: translate(-1px, -1px) rotate(var(--tw-rotate, 0deg));
 }
 
 /* ──────────────────────────────────────────────
-   Y2K 3D PUSHPIN — CSS-only realistic pushpin
-   Structure: wrapper > sphere-cap + neck + needle-tip + cast-shadow
+   PAINT PUSHPIN — pixelated tack
 ────────────────────────────────────────────── */
 @utility pin-head {
-  /* Outer wrapper: positions the whole pin */
   position: absolute;
   left: 50%;
-  top: -36px;
-  width: 34px;
-  height: 46px;
+  top: -20px;
+  width: 16px;
+  height: 20px;
   transform: translateX(-50%);
   z-index: 10;
   pointer-events: none;
 }
 
-/* The glossy sphere cap (top dome) */
+/* Pixel thumbtack top */
 .pin-head::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 30px;
-  border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
+  left: 0;
+  width: 16px;
+  height: 16px;
   background:
-    /* Top-left specular highlight */
-    radial-gradient(ellipse 55% 40% at 35% 28%, rgba(255,255,255,0.90) 0%, rgba(255,255,255,0.0) 70%),
-    /* Bottom-right secondary highlight */
-    radial-gradient(ellipse 30% 22% at 72% 70%, rgba(255,255,255,0.30) 0%, transparent 80%),
-    /* Base color sphere — red like reference image */
-    radial-gradient(ellipse 90% 90% at 40% 35%,
-      #ff5555 0%,
-      #cc1111 40%,
-      #880000 75%,
-      #550000 100%
-    );
-  box-shadow:
-    0 4px 8px rgba(0,0,0,0.55),
-    0 1px 2px rgba(0,0,0,0.70),
-    inset 0 -3px 5px rgba(0,0,0,0.30);
+    /* Simple pixel cross for thumbtack */
+    linear-gradient(#ff0000, #cc0000);
+  border: 2px solid #000000;
+  box-shadow: 1px 1px 0 #000000;
+  image-rendering: pixelated;
 }
 
-/* The neck / shaft connecting sphere to needle */
+/* Needle */
 .pin-head::after {
   content: "";
   position: absolute;
-  top: 22px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  /* Needle: thin metallic gradient cylinder */
-  width: 4px;
-  height: 22px;
-  border-radius: 2px 2px 1px 1px;
-  background: linear-gradient(
-    to right,
-    #888 0%,
-    #ccc 25%,
-    #f0f0f0 45%,
-    #bbb 65%,
-    #777 100%
-  );
-  box-shadow: 0 2px 4px rgba(0,0,0,0.50);
+  width: 3px;
+  height: 8px;
+  background: #808080;
+  border: 1px solid #000000;
 }
-
