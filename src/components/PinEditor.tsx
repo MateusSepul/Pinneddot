@@ -74,6 +74,8 @@ export function PinEditor({ open, onOpenChange, onSave }: Props) {
   const start = (e: React.PointerEvent) => {
     const c = ctx();
     if (!c) return;
+    // Capture the pointer so strokes aren't interrupted when cursor leaves canvas
+    (e.currentTarget as HTMLCanvasElement).setPointerCapture(e.pointerId);
     drawing.current = true;
     const p = pos(e);
     c.lineWidth = 3;
@@ -93,8 +95,9 @@ export function PinEditor({ open, onOpenChange, onSave }: Props) {
     c.stroke();
   };
 
-  const end = () => {
+  const end = (e: React.PointerEvent) => {
     drawing.current = false;
+    (e.currentTarget as HTMLCanvasElement).releasePointerCapture(e.pointerId);
   };
 
   const clear = () => {
@@ -217,7 +220,7 @@ export function PinEditor({ open, onOpenChange, onSave }: Props) {
                   onPointerDown={start}
                   onPointerMove={move}
                   onPointerUp={end}
-                  onPointerLeave={end}
+                  onPointerCancel={end}
                   style={{
                     width: "100%",
                     touchAction: "none",
